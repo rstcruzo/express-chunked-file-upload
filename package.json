@@ -1,0 +1,29 @@
+{
+  "name": "@rstcruzo/express-chunked-file-upload",
+  "version": "0.1.0",
+  "description": "Node.js middleware for handling chunked uploads.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rstcruzo/express-chunked-file-upload.git"
+  },
+  "keywords": [
+    "form",
+    "post",
+    "multipart",
+    "express",
+    "formdata",
+    "middleware",
+    "chunked",
+    "upload"
+  ],
+  "author": "Rodrigo Santa Cruz <rstcruzo@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rstcruzo/express-chunked-file-upload/issues"
+  },
+  "homepage": "https://github.com/rstcruzo/express-chunked-file-upload#readme"
+}
