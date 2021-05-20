@@ -25,5 +25,13 @@
   "bugs": {
     "url": "https://github.com/rstcruzo/express-chunked-file-upload/issues"
   },
-  "homepage": "https://github.com/rstcruzo/express-chunked-file-upload#readme"
+  "homepage": "https://github.com/rstcruzo/express-chunked-file-upload#readme",
+  "dependencies": {
+    "busboy": "0.3.1",
+    "content-range": "2.0.0",
+    "merge-files": "0.1.2"
+  },
+  "devDependencies": {
+    "express": "4.17.1"
+  }
 }
