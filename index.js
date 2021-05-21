@@ -7,11 +7,13 @@ const { parse } = require('content-range');
 const mergeFiles = require('merge-files');
 
 class ChunkedUpload {
-  constructor(fileFields, chunkIdHeader, chunkSizeHeader, filePath = '') {
-    this.fileFields = fileFields;
-    this.chunkIdHeader = chunkIdHeader;
-    this.chunkSizeHeader = chunkSizeHeader;
-    this.filePath = filePath;
+  constructor(options) {
+    options = options || {};
+
+    this.fileFields = options.fileFields || ['file'];
+    this.chunkIdHeader = options.chunkIdHeader || 'file-chunk-id';
+    this.chunkSizeHeader = options.chunkSizeHeader || 'file-chunk-size';
+    this.filePath = options.filePath || '';
   }
 
   _isLastPart = contentRange => {
