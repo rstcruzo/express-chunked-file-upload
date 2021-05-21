@@ -3,7 +3,7 @@ const ChunkedUpload = require('./index');
 
 const app = express();
 
-const chunkedUpload = new ChunkedUpload();
+const chunkedUpload = new ChunkedUpload({ filePath: 'media/' });
 
 app.post('/', chunkedUpload.makeMiddleware(), (req, res) => {
     res.send('Hello world.');

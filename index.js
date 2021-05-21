@@ -35,6 +35,8 @@ class ChunkedUpload {
     );
 
     const originalFilePath = path.join(this.filePath, filename);
+    this._makeSureDirExists(this.filePath);
+
     return mergeFiles(partsFilenames, originalFilePath).then(_ => {
       partsFilenames.forEach(filename => fs.unlinkSync(filename));
     });
