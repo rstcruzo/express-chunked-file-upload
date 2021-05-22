@@ -67,13 +67,15 @@ class ChunkedUpload {
         const writableStream = fs.createWriteStream(partPath);
         file.pipe(writableStream);
 
-        if (this._isLastPart(contentRange)) {
-          this._buildOriginalFile(chunkId, chunkSize, contentRange, filename).then(_ => {
+        file.on('end', () => {
+          if (this._isLastPart(contentRange)) {
+            this._buildOriginalFile(chunkId, chunkSize, contentRange, filename).then(_ => {
+              next();
+            });
+          } else {
             next();
-          });
-        } else {
-          next();
-        }
+          }
+        });
       });
 
       req.pipe(busboy);
