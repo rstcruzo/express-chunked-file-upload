@@ -45,7 +45,7 @@ class ChunkedUpload {
     makeMiddleware = () => {
         return (req, res, next) => {
             const busboy = new Busboy({ headers: req.headers });
-            busboy.on('file', (fieldName, file, filename, encoding, mimetype) => {
+            busboy.on('file', (fieldName, file, filename, _0, _1) => {
 
                 if (!this.fileFields.includes(fieldName)) {  // Current field is not handled.
                     return next();
