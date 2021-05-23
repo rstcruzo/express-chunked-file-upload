@@ -16,7 +16,7 @@ Nodejs code:
 
 ```javascript
 const express = require('express');
-const ChunkedUpload = require('./index');
+const ChunkedUpload = require('@rstcruzo/express-chunked-file-upload');
 
 const app = express();
 
