@@ -10,14 +10,14 @@ class ChunkedUpload {
     constructor(options) {
         options = options || {};
 
-        this.fileFields = options.fileFields || ['file'];
+        this.fileField = options.fileField || 'file';
         this.chunkIdHeader = options.chunkIdHeader || 'file-chunk-id';
         this.chunkSizeHeader = options.chunkSizeHeader || 'file-chunk-size';
         this.filePath = options.filePath || '';
     }
 
     _isLastPart = contentRange => {
-        return contentRange.size === contentRange.end;
+        return contentRange.size <= contentRange.end;
     }
 
     _makeSureDirExists = dirName => {
@@ -27,7 +27,7 @@ class ChunkedUpload {
     }
 
     _buildOriginalFile = (chunkId, chunkSize, contentRange, filename) => {
-        const totalParts = Math.floor(contentRange.size / chunkSize) + 1;
+        const totalParts = Math.ceil(contentRange.size / chunkSize);
 
         const parts = [...Array(totalParts).keys()]; // [0, 1, 2, ..., totalParts]
         const partsFilenames = parts.map(part =>
@@ -47,7 +47,7 @@ class ChunkedUpload {
             const busboy = new Busboy({ headers: req.headers });
             busboy.on('file', (fieldName, file, filename, _0, _1) => {
 
-                if (!this.fileFields.includes(fieldName)) {  // Current field is not handled.
+                if (this.fileField !== fieldName) {  // Current field is not handled.
                     return next();
                 }
 
