@@ -7,7 +7,7 @@ const server = express();
 const chunkedUpload = new ChunkedUpload({ filePath: 'media/' });
 
 server.post('/', chunkedUpload.makeMiddleware(), (req, res) => {
-    res.send('Success.');
+    res.send({ filePart: req.filePart, isLastPart: req.isLastPart });
 });
 
 server.use((err, req, res, next) => {

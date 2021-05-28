@@ -22,7 +22,14 @@ const app = express();
 
 const chunkedUpload = new ChunkedUpload({ filePath: 'media/' });
 
-app.post('/upload', chunkedUpload.makeMiddleware());
+app.post('/upload', chunkedUpload.makeMiddleware(), (req, res) => {
+    if (req.filePart === 0) {
+        // ... Do something when file upload starts
+    }
+    if (req.isLastPart) {
+        // ... Do something when file upload finishes
+    }
+});
 ```
 
 Client js code to send first chunk:
@@ -93,3 +100,8 @@ const chunkedUpload = new ChunkedUpload(
 - `chunkIdHeader`: Header name for chunk id (default: `'file-chunk-id'`).
 - `chunkSizeHeader`: Header name for chunk size (default: `'file-chunk-size'`).
 - `fileField`: Field to process (default: `'file'`).
+
+### Request fields
+- `filePart`: Part number uploaded, it goes from 0 to the total number of parts - 1 (`req.filePart`).
+- `isLastPart`: Boolean that tells if the part uploaded is the last one (`req.isLastPart`).
+    This means that now the original file is available at the destination path (`filePath`). 

@@ -84,7 +84,9 @@ class ChunkedUpload {
                 file.pipe(writableStream);
 
                 file.on('end', () => {
+                    req.filePart = part;
                     if (this._isLastPart(contentRange)) {
+                        req.isLastPart = true;
                         this._buildOriginalFile(chunkId, chunkSize, contentRange, filename).then(() => {
                             next();
                         }).catch(_ => {
@@ -92,6 +94,7 @@ class ChunkedUpload {
                             next(new Error(errorMessage));
                         });
                     } else {
+                        req.isLastPart = false;
                         next();
                     }
                 });
