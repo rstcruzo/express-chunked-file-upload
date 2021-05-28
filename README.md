@@ -83,7 +83,7 @@ const chunkedUpload = new ChunkedUpload(
         filePath: 'media/',
         chunkIdHeader: 'another-header-name-for-id',
         chunkSizeHeader: 'antoher-header-name-for-size',
-        fileFields: ['file1', 'file2']
+        fileField: 'image'
     }
 );
 ```
@@ -92,4 +92,4 @@ const chunkedUpload = new ChunkedUpload(
 - `filePath`: Path to save files (default: `''`).
 - `chunkIdHeader`: Header name for chunk id (default: `'file-chunk-id'`).
 - `chunkSizeHeader`: Header name for chunk size (default: `'file-chunk-size'`).
-- `fileFields`: Array with fields to process (default: `['file']`).
+- `fileField`: Field to process (default: `'file'`).
